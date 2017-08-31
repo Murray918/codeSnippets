@@ -6,11 +6,11 @@ const credentials = [{
   password: '0987765'
 }]
 
-function loginCreator (user, pass) {
+function loginCreator (userCreate, passCreate) {
   let login = false;
   let newLogin = {}
-  newLogin.username = user;
-  newLogin.password = pass;
+  newLogin.username = userCreate;
+  newLogin.password = passCreate;
   credentials.forEach(checker => {
     if (newLogin.username === checker.username){
       let error = `The name ${newlogin.username} has been taken by another user.`

@@ -12,9 +12,8 @@ const loginProofer = credentials.loginProofer;
 const loginCreator = credentials.loginCreator;
 const CodeSchema = require('./models/model.js');
 mongoose.Promise = require('bluebird');
-const MongoClient = require('mongodb').MongoClient,
-  assert = require('assert');
-// Replace "test" with your database name.
+const MongoClient = require('mongodb').MongoClient;
+//this connects to the mongo databse.
 mongoose.connect('mongodb://localhost:27017/codeSnippet');
 
 //this is alll
@@ -35,7 +34,7 @@ app.use(session({
 }));
 //This is the login page section
 //this is the interceptor
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   console.log('in the interceptor');
   // this is where the login screen sends a cookie to authenticate the login page
   // if the url == login then render the login p
@@ -49,7 +48,9 @@ app.use(function(req, res, next) {
   }
 })
 //post for login page
-app.post('/login', function(req, res) {
+//this first post is for the users who already have a
+//user name and password
+app.post('/login', (req, res) => {
   console.log('Name is username:' + req.body.username);
   let username = req.body.username;
   console.log('Password is :' + req.body.password);
@@ -68,10 +69,30 @@ app.post('/login', function(req, res) {
     });
   }
 });
+//this post creates a username and password for new users
+app.post('/createLogin', (req, res) => {
+  console.log('Name is username:' + req.body.username);
+  let userCreate = req.body.username;
+  console.log('Password is :' + req.body.password);
+  let passCreate = req.body.password;
+
+  if ( loginCreator (userCreate, passCreate)) {
+    //this is part of the session object that if true takes you to the home page
+    req.session.login = true;
+    req.session.username = username;
+    res.redirect('/');
+  } else {
+    //this will show an error if the username
+    //and password are not sored in the array
+    res.render('login', {
+      error: 'Bad login'
+    });
+  }
+});
 
 //This is the Home page
 //this will render the home page
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   res.render('home')
 })
 // this recieves the information from the form
@@ -80,7 +101,7 @@ app.post('/', (req, res, next) => {
   // console.log(snip);
   const note = req.body.notes;
   // console.log(note);
-  const tags = req.body.tags;
+  const tags = req.body.tags.split(' ');
   // console.log(tags);
   const language = req.body.language;
   // console.log(language);
@@ -94,7 +115,7 @@ app.post('/', (req, res, next) => {
     language: language
   })
   snippet.save()
-    .then(function() {
+    .then(() => {
       // console.log('saved' + snippet);
       return CodeSchema.find();
     }).then( (theSnippets) => {
@@ -103,14 +124,16 @@ app.post('/', (req, res, next) => {
       })
     })
 })
+
+
 //in this section our
-app.listen(3000, function() {
+app.listen(3000, () => {
   console.log('Successfully started express application!');
 })
 
-process.on('SIGINT', function() {
+process.on('SIGINT', () => {
   console.log("\nshutting down");
-  mongoose.connection.close(function() {
+  mongoose.connection.close( () => {
     console.log('Mongoose default connection disconnected on app termination');
     process.exit(0);
   });

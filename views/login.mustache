@@ -7,10 +7,19 @@
   </head>
   <body>
     <h1>Login</h1>
-    <form class="" action="/login" method="post">
+    {{error}}
+    <form id="loginForm" action="/login" method="post">
       <input type="text" name="username" value="">
       <input type="password" name="password" value="">
       <button type="submit" name="button">Submit</button>
+    </form>
+
+    <form id="createLogin" action="/login.html" method="post">
+      <input type="userCreate" name="userCreate" value="">
+      <input type="passCreate" name="passCreate" value="">
+      <button type="submit" name="button">Create Login</button>
+
+
     </form>
   </body>
 </html>

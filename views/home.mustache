@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <title>Home</title>
 
-  </head>
-  <body>
-    <h1>Home</h1>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>Coding Snippets</title>
+
+</head>
+
+<body>
+  <div id="formContainer">
+
+  <h1>Code Snippets</h1>
+
+  <form id="submit" action="/" method="post">
+    <textarea name="snippetInput" rows="8" cols="80"></textarea>
+    <br>
+    <h4>Enter a note here </h4>
+    <input type="notes" name="notes" placeholder="additional notes">
+    <br>
+    <h4>Tag your snippet here seperate each tag by a space</h4>
+
+    <input type="tags" name="tags" placeholder="Tags">
+    <br>
+    <h4>Pickalanguage</h4>
+    <input type="language" name="language" placeholder="Chose a language">
+    <br>
+    <h4>Name your snippet</h4>
+    <input type="title" name="title" placeholder="Title your Snippet">
+    <button type="submit" name="button">Submit</button>
+  </form>
+    </div>
+
+<div id="snippetContainer">
+  {{#theSnippets}}
+    <a href="/{{id}}">{{title}}</a>
+    <p>{{snippet}}</p>
+    <p>{{notes}}</p>
+    <p>{{language}}</p>
+    <p>{{tags}}</p>
+  {{/theSnippets}}
+</div>
+
+</body>
+
 </html>

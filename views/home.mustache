@@ -8,9 +8,15 @@
 </head>
 
 <body>
-
+<!-- this lets us search for snippets by tag -->
   <form class="searchTags" action="/searchtags" method="post">
     <input type="text" name="searchtags" placeholder="Search By Tags">
+    <button type="submit" name="button">Search</button>
+  </form>
+
+  <!-- this lets us search by language -->
+  <form class="searchLanguae" action="/searchlanguage" method="post">
+    <input type="text" name="searchlanguage" placeholder="Search By Tags">
     <button type="submit" name="button">Search</button>
   </form>
 

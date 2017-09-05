@@ -217,7 +217,20 @@ app.post('/searchtags', (req, res, next) => {
     // res.redirect('/')
   })
 })
-
+app.post('/searchlanguage', (req, res, next) => {
+  let langToSearch = req.body.searchtags
+  // console.log(CodeSchema.find());
+  console.log(langToSearch);
+  CodeSchema.find({
+    language: langToSearch
+  }).then((searchSnippets) => {
+    console.log(searchSnippets);
+    res.render('search', {
+      searchSnippets: searchSnippets
+    })
+    // res.redirect('/')
+  })
+})
 //in this section we connect to port 3000 to connect with the server
 app.listen(3000, () => {
   console.log('Successfully started express application!');

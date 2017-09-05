@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>update</title>
+  </head>
+  <body>
+    <div id="formContainer">
+      {{#snipToUpdate}}
+      <h4>Title: {{title}}</h4>
+      <h4>Snippet: {{snippet}}</h4>
+      <h4>Notes: {{notes}}</h4>
+      <h4>Language: {{language}}</h4>
+      <h4>Tags: {{tags}}</h4>
+      {{/snipToUpdate}}
+
+      {{#snipToUpdate}}
+    <form id="submit" action="/update/{{_id}}" method="post">
+      <textarea name="upSnip" rows="8" cols="80" value={{snippet}} ></textarea>
+      <br>
+      <h4>Enter a note here </h4>
+      <input type="upNotes" name="notes" value={{notes}}>
+      <br>
+      <h4>Tag your snippet here seperate each tag by a space</h4>
+
+      <input type="upTags" name="upTags" value={{tags}}>
+      <br>
+      <h4>Pick a language</h4>
+      <input type="upLanguage" name="language" value={{language}}>
+      <br>
+      <h4>Name your snippet</h4>
+      <input type="upTitle" name="title" value={{title}}>
+      <button type="submit" name="button">Update</button>
+    </form>
+      </div>
+      {{/snipToUpdate}}
+  </body>
+</html>
